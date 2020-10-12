@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Header } from './Header';
+import { Header } from './components/Header';
+import { Step1 } from './components/Step1';
 
-const Step1 = () => <>Step 1</>
 const Step2 = () => <>Step 2</>
 const Step3 = () => <>Step 3</>
 const Result = () => <>Result</>
