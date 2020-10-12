@@ -8,12 +8,19 @@ import { Form } from './Form';
 import { Typography } from '@material-ui/core';
 import { FileInput } from './FileInput';
 import { useForm } from 'react-hook-form';
+import { useData } from '../DataContext';
 
 export const Step3 = () => {
   const history = useHistory();
-  const { control, handleSubmit } = useForm();
-  const onSubmit = () => {
+  const {data, setValues} = useData();
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      files: data.files
+    }
+  });
+  const onSubmit = (data) => {
     history.push('./result')
+    setValues(data);
   }
   
   return (

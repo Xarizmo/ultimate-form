@@ -14,6 +14,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
+import { useData } from '../DataContext';
 
 const schema = yup.object().shape({
   email: yup
@@ -36,7 +37,9 @@ const normalizePhoneNumber = (value) => {
 
 export const Step2 = () => {
   const history = useHistory();
+  const { data, setValues } = useData();
   const { register, handleSubmit, errors, watch } = useForm({
+    defaultValues: { email: data.email, hasPhone: data.hasPhone, phoneNumber: data.phoneNumber },
     mode: 'onBlur',
     resolver: yupResolver(schema),
   })
@@ -44,8 +47,9 @@ export const Step2 = () => {
   // watch будет автоматически обновлять значение константы hasPhone
   const hasPhone = watch('hasPhone')
   
-  const onSubmit = () => {
-    history.push('/step3')
+  const onSubmit = (data) => {
+    history.push('/step3');
+    setValues(data);
   }
   
   return (
@@ -69,7 +73,13 @@ export const Step2 = () => {
         />
         <FormControlLabel
           control={
-            <Checkbox name='hasPhone' inputRef={register} color='primary'/>
+            <Checkbox
+              defaultValue={data.hasPhone}
+              defaultChecked={data.hasPhone}
+              name='hasPhone'
+              inputRef={register}
+              color='primary'
+            />
           }
           label='Do you have a phone'
         />
