@@ -1,13 +1,15 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+
 import { MainContainer } from './MainContainer';
-import { Typography } from '@material-ui/core';
 import { Form } from './Form';
 import { Input } from './Input';
 import { PrimaryButton } from './PrimaryButton';
+
+import { Typography } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const schema = yup.object().shape({
   firstName: yup
